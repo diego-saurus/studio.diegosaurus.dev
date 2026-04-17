@@ -20,7 +20,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  serverURL: 'http://localhost:3000',
+  serverURL: process.env.SERVER_URL || '',
   collections: [Users, Media, Pages],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
