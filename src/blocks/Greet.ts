@@ -3,29 +3,39 @@ import { lexicalHTMLField } from '@payloadcms/richtext-lexical'
 import { Field } from 'payload'
 
 export const Greet: Field = {
-  name: 'greet',
-  type: 'group',
+  label: 'Greet',
+  type: 'collapsible',
+  admin: {
+    initCollapsed: true,
+  },
   fields: [
     {
-      name: 'label',
-      type: 'text',
-    },
-    {
-      name: 'description',
-      type: 'richText',
-      localized: true,
-    },
-    lexicalMarkdownField({
-      lexicalFieldName: 'description',
-    }),
-    lexicalHTMLField({
-      lexicalFieldName: 'description',
-      htmlFieldName: 'description_html',
-    }),
-    {
-      name: 'profileImage',
-      relationTo: 'media',
-      type: 'upload',
+      label: '',
+      name: 'greet',
+      type: 'group',
+      fields: [
+        {
+          name: 'label',
+          type: 'text',
+        },
+        {
+          name: 'description',
+          type: 'richText',
+          localized: true,
+        },
+        lexicalMarkdownField({
+          lexicalFieldName: 'description',
+        }),
+        lexicalHTMLField({
+          lexicalFieldName: 'description',
+          htmlFieldName: 'description_html',
+        }),
+        {
+          name: 'profileImage',
+          relationTo: 'media',
+          type: 'upload',
+        },
+      ],
     },
   ],
 }

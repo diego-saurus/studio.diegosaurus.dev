@@ -89,8 +89,12 @@ export interface Config {
     defaultIDType: string;
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'id') | ('en' | 'id')[];
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+  };
   locale: 'en' | 'id';
   widgets: {
     collections: CollectionsWidget;
@@ -243,6 +247,27 @@ export interface Page {
       lat: number;
       lon: number;
       zoom: number;
+    };
+    about?: {
+      title?: string | null;
+      content?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+      content_html?: string | null;
+      background?: (string | null) | Media;
+      foreground?: (string | null) | Media;
     };
     id?: string | null;
     blockName?: string | null;
@@ -445,6 +470,15 @@ export interface PagesSelect<T extends boolean = true> {
                     lon?: T;
                     zoom?: T;
                   };
+              about?:
+                | T
+                | {
+                    title?: T;
+                    content?: T;
+                    content_html?: T;
+                    background?: T;
+                    foreground?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -491,6 +525,26 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: string;
+  favicon: string | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  favicon?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

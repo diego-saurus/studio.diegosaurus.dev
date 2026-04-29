@@ -1,28 +1,35 @@
 import { Field } from 'payload'
 
 export const Location: Field = {
-  type: 'group',
-  name: 'location',
+  type: 'collapsible',
+  label: 'Location',
   fields: [
     {
-      type: 'number',
-      label: 'Latitude',
-      name: 'lat',
-      required: true,
-    },
-    {
-      type: 'number',
-      label: 'Longitude',
-      name: 'lon',
-      required: true,
-    },
+      label: '',
+      type: 'group',
+      name: 'location',
+      fields: [
+        {
+          type: 'number',
+          label: 'Latitude',
+          name: 'lat',
+          required: true,
+        },
+        {
+          type: 'number',
+          label: 'Longitude',
+          name: 'lon',
+          required: true,
+        },
 
-    {
-      type: 'number',
-      label: 'Zoom',
-      name: 'zoom',
-      required: true,
-      defaultValue: 15,
+        {
+          type: 'number',
+          label: 'Zoom',
+          name: 'zoom',
+          required: true,
+          defaultValue: 15,
+        },
+      ],
     },
   ],
 }
